@@ -86,7 +86,7 @@ const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,us
 const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,errorMessages) => {
   if (userName && password) {
     const before = Date.now();
-	const userNameInfo = mask(userName, 3, 7);
+	  //	const userNameInfo = mask(userName, 3, 7);
 	 if(isMainAccount && accountIndex == 1){
 			firstUserName = userNameInfo;
 		}
