@@ -40,11 +40,11 @@ const doUserTask = async (cloudClient) => {
 };
 
 // 家庭任务签到
-const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,userNameInfo) => {
+const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,userName) => {
   const { familyInfoResp } = await cloudClient.getFamilyList();
   if (!familyInfoResp) {
 	  console.log(`未能获取家庭信息`);
-      return errorMessages.push(`${accountIndex}. 账号 ${userNameInfo} 错误: 未能获取家庭信息`);
+      return errorMessages.push(`${accountIndex}. 账号 ${userName} 错误: 未能获取家庭信息`);
     }
   
     let familyId = null;
@@ -57,7 +57,7 @@ const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,us
         familyId = targetFamily.familyId;
       } else {
 		  console.log(`没有加入到指定家庭分组`);
-        return errorMessages.push(`${accountIndex}. 账号 ${userNameInfo} 错误: 没有加入指定家庭组`);
+        return errorMessages.push(`${accountIndex}. 账号 ${userName} 错误: 没有加入指定家庭组`);
       }
     } else {
       familyId = familyInfoResp[0].familyId;
