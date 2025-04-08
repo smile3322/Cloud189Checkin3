@@ -86,12 +86,12 @@ const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,us
 const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,errorMessages) => {
   if (userName && password) {
     const before = Date.now();
-	  //	const userNameInfo = mask(userName, 3, 7);
+	  //	const  userName = mask(userName, 3, 7);
 	 if(isMainAccount && accountIndex == 1){
-			firstUserName = userNameInfo;
+			firstUserName =  userName;
 		}
     try {
-       logger.log(`${accountIndex}. 账号 ${userNameInfo}`);
+       logger.log(`${accountIndex}. 账号 ${ userName}`);
       const cloudClient =  new CloudClient({
         username: userName,
         password,
@@ -104,7 +104,7 @@ const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,e
     //  });
       
        //await doUserTask(cloudClient);
-       //await doFamilyTask(cloudClient,acquireFamilyTotalSize,errorMessages,userNameInfo);
+       //await doFamilyTask(cloudClient,acquireFamilyTotalSize,errorMessages, userName);
 	   const { familyInfoResp } = await cloudClient.getFamilyList();
 		logger.log(`有${familyInfoResp.length}个家庭：`);
 	   if (familyInfoResp){
@@ -133,11 +133,11 @@ const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,e
     } catch (e) {
       logger.log(e);
       if (e.code === "ECONNRESET" || e.code === "ETIMEDOUT") {
-        console.log(`${accountIndex}. 账号 ${userNameInfo}请求超时`);
+        console.log(`${accountIndex}. 账号 ${ userName}请求超时`);
         throw e;
       }else{
 		
-		errorMessages.push( `${accountIndex}. 账号 ${userNameInfo} 错误: ${
+		errorMessages.push( `${accountIndex}. 账号 ${ userName} 错误: ${
     typeof e === "string" ? e : e.message || "未知错误"
   }`);
       
